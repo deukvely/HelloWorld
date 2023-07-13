@@ -21,5 +21,7 @@ public class CastingExe {
 		
 		System.out.printf("\nnum4의 값은 %d, num4의 값은 %.2f %s", //
 				num3, num4,"입니다");
+
+		///hvbjhvjh
 	}
 }

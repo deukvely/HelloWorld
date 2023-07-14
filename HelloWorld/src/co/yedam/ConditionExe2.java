@@ -10,23 +10,23 @@ public class ConditionExe2 {
 		
 				while(true) {
 					System.out.println("메뉴를 선택하세요: (숫자를 입력)>> ");
-					String menu = scn.nextLine();
 					System.out.println("1.로그인 2.로그아웃 3.회원가입 4.종료");
+					String menu = scn.nextLine();
 					int a = Integer.parseInt(menu);
-				switch(a){
-				case 1:
-					login();
-					break;
-				case 2:
-					logout();
-					break;
-				case 3:
-					signUp();
-					break;
-				default:
-					if(a==4)
-					break;
-				}
+					switch(a){
+					case 1:
+						login();
+						break;
+					case 2:
+						logout();
+						break;
+					case 3:
+						signUp();
+						break;
+					default:
+						System.out.println("종료");
+						break;
+					}
 			}	
 	} // end of main();
 	

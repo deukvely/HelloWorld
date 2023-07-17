@@ -9,6 +9,8 @@ public class BoardMain {
 //		getMax(10, 20);
 //		getMemberName(new Member(1001, "홍길동"));
 		int result = sum();
+		result = sum(10,20);
+		result = sum(new int[] { 10, 20, 30});
 		System.out.println("결과값은 "+ result);
 	}
 	// 반환유형
@@ -17,6 +19,16 @@ public class BoardMain {
 		int num2 = (int) (Math.random() * 10);
 
 		return num1 + num2;
+	}
+	public static int sum(int num1, int num2) {	
+		return num1 + num2;
+	}
+	public static int sum(int[] intAry) {
+		int sum = 0;
+		for (int i = 0; i < intAry.length; i++) {
+			sum += intAry[i];
+		}
+		return sum;
 	}
 	// 매개변수
 	public static void message(String name) {

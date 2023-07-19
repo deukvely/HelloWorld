@@ -20,6 +20,7 @@ public class MemoAppExe {
 				String no = scn.next();
 				String content = scn.next();
 				String date = scn.next();
+<<<<<<< HEAD
 //				System.out.println(no+" "+ content+" "+date);
 				Memo memo = new Memo(no, content, date);
 				if(app.addMemo(memo)) {
@@ -62,3 +63,48 @@ public class MemoAppExe {
 		System.out.println("end of prog");
 	} 
 }
+=======
+				String no1 = scn.nextLine();
+//				System.out.println(no+" "+ content+" "+date);
+				Memo memo = new Memo(no, content, date);
+				if(app.addMemo(memo)) {
+					System.out.println("정상적으로 등록되었습니다.");
+				} else {
+					System.out.println("등록이 안 되었습니다.");
+				}
+			// 수정
+//			} else if(mNo == 2) {
+//				boolean isExist = false;
+//				System.out.println("수정>> ");
+//				System.out.print("번호입력");
+//				int num = Integer.parseInt(scn.nextLine());
+//				for (int i = 0; i < app.memo.length; i++) {
+//					if(app.memo[i] != null && app.memo[i] == num) {
+//						app.memo[i] = null;
+//						System.out.println("삭제 완료되었습니다.");
+//						// 변경 후 반복문 종료
+//						isExist = true;
+//						break;
+//					}
+//				}
+			} else if(mNo == 3) {
+//				
+			} else if(mNo == 4) {
+				Memo[] ary = app.memoList();
+				for(int i = 0; i < ary.length; i++) {
+					if(ary[i] != null) {
+						System.out.printf("학생번호 %s, 이름 %s, 점수 %d\n",
+								ary[i].no, ary[i].content, ary[i].date);
+					}
+				}
+			} else if(mNo == 5) {
+				
+			} else if(mNo == 6) {
+				System.out.println("종료");
+				run = false;
+			}
+		}
+		System.out.println("end of prog");
+	} 
+}
+>>>>>>> branch 'master' of https://github.com/deukvely/HelloWorld.git

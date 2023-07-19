@@ -27,6 +27,7 @@ public class Student {
 		this.stdName = stdName;
 		this.score = score;
 		this.height = height;
+		
 	}
 	// 메소드.
 	public String showInfo() {

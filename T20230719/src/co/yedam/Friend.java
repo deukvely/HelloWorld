@@ -1,18 +1,30 @@
 package co.yedam;
 
 public class Friend {
-	String name;
-	String phone;
-	String birth;
-	String height;
-
-	Friend[] friends;
-	int friendNum = 0;
+	private String name;
+	private String phone;
+	private String birth;
+	private double height;
 
 	public Friend() {
-		super();
 	}
 
+	public Friend(String name, String phone, String birth, String height) {
+		super();
+		this.name = name;
+		this.phone = phone;
+		this.birth = birth;
+		this.height = Double.parseDouble(height);
+	}
+
+	public Friend(String name, String phone, String birth, double height) {
+		super();
+		this.name = name;
+		this.phone = phone;
+		this.birth = birth;
+		this.height = height;
+	}
+	
 	public String getName() {
 		return name;
 	}
@@ -37,41 +49,16 @@ public class Friend {
 		this.birth = birth;
 	}
 
-	public String getHeight() {
+	public double getHeight() {
 		return height;
 	}
 
-	public void setHeight(String height) {
+	public void setHeight(double height) {
 		this.height = height;
 	}
 
-	public Friend(String name, String phone, String birth, String height) {
-		super();
-		this.name = name;
-		this.phone = phone;
-		this.birth = birth;
-		this.height = height;
-
+	@Override
+	public String toString() {
+		return "이름: " + name + ", 전화번호: " + phone + ", 생년월일: " + birth + ", 키: " + height;
 	}
-
-	boolean register(Friend friend) {
-		if (friendNum >= 2) {
-			return false;
-		}
-		friends[friendNum++] = friend;
-		return true;
-	}
-
-	Friend[] list() {
-		return friends;
-	}
-
-	void modify() {
-
-	}
-
-	void remove() {
-
-	}
-
 }

@@ -1,64 +1,80 @@
 package co.yedam.bank;
 
-import java.util.Scanner;
-
-import co.yedam.student.Student;
-
 public class BankApp {
-	Scanner scn = new Scanner(System.in);
-	Account[] accounts;
-	int accountNum = 0;
-	
+
 	// 싱글톤 방식
 	private static BankApp instance = new BankApp();
-	
-	boolean addAccount(Account acc) {
-		if(accountNum >= 2) { // 등록할 공간 부족 => 실패
-			return false;
-		}
-		accounts[accountNum++] = acc;
-		return true;
-	}
-	
-	
-	void BankApp() {
+
+	Account[] accounts;
+	int accountNum = 0;
+
+	Account acc = new Account();
+
+	// 생성자
+	private BankApp() {
 		accounts = new Account[10];
 	}
 
-	void registerAccount() {
-		Student[] studentList() {
-//			for (int i = 0; i < studentNum; i++) {
-//				System.out.printf("학생번호 %s, 이름 %s, 점수 %d\n",
-//						students[i].stdNo, students[i].stdName, students[i].score);
-//			}
-			return students;
-		}
-
+	public static BankApp getInstance() {
+		return instance;
 	}
 
-	void deposit() {
-		int sum = 0;
-		for (int i = 0; i < studentNum; i++) {
-			sum += students[i].score;
-		}
-		return sum;
-//		System.out.println("점수의 합계: " + sum );
+	void registerAccount(Account cnt) {
+		accounts[accountNum++] = cnt;
 	}
 
-	void whithdraw() {
-		System.out.println("계좌출금합니다.");
-	}
-
-	void checkBalance() {
-		System.out.println("계좌잔액입니다.");
-	}
-
-	void accountList() {
-		System.out.println("계좌목록입니다.");
+	int accCheck(String accountNo) {
+		int ox = 0;
 		for (int i = 0; i < accounts.length; i++) {
-			if (accounts[i] != null) {
-				System.out.printf("계좌번호 %d, 예금주 %s, 잔고 %d", accounts[i].no, accounts[i].name, accounts[i].balance);
+			if (accounts[i] != null && accountNo.equals(accounts[i].accountNo)) {
+				ox = 1;
+			}
+
+		}
+		return ox;
+
+	}
+
+	int deposit(String accountNo, int dps) {
+		int balance = 0;
+		for (int i = 0; i < accounts.length; i++) {
+			if (accounts[i] != null && accountNo.equals(accounts[i].accountNo)) {
+				balance = accounts[i].balance += dps;
+
 			}
 		}
+		return balance;
+	}
+
+	boolean withdraw(String accountNo, int wdr) {
+		int balance = 0;
+		int cnt = 0;
+		for (int i = 0; i < accounts.length; i++) {
+			if (accounts[i] != null && accountNo.equals(accounts[i].accountNo)) {
+				balance = accounts[i].balance;
+				cnt = i;
+			}
+		}
+		if (balance - wdr < 0) {
+			return false;
+		}
+		accounts[cnt].setBalance(balance - wdr);
+		return true;
+
+	}
+
+	int checkBalance(String accountNo) {
+		int balance = 0;
+		for (int i = 0; i < accounts.length; i++) {
+			if (accounts[i] != null && accountNo.equals(accounts[i].accountNo)) {
+				balance = accounts[i].balance;
+
+			}
+		}
+		return balance;
+	}
+
+	Account[] accountList() {
+		return accounts;
 	}
 }

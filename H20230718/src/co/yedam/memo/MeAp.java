@@ -1,6 +1,6 @@
 package co.yedam.memo;
 
-public class MemoApp {
+public class MeAp {
 	Memo[] memos;
 	int memoNumber = 0;
 
@@ -54,4 +54,5 @@ public class MemoApp {
 		}
 		return null;
 	}
+}
 }

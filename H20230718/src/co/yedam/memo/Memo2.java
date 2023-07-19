@@ -1,37 +1,42 @@
 package co.yedam.memo;
 
-public class Memo {
-	String memoNum;
+public class Memo2 {
+	String number;
 	String content;
 	String date;
-	
-	public String getMemoNum() {
-		return memoNum;
+
+	public Memo2() {
+
 	}
-	public void setMemoNum(String memoNum) {
-		this.memoNum = memoNum;
+
+	public String getNumber() {
+		return number;
 	}
+
+	public void setNumber(String number) {
+		this.number = number;
+	}
+
 	public String getContent() {
 		return content;
 	}
+
 	public void setContent(String content) {
 		this.content = content;
 	}
+
 	public String getDate() {
 		return date;
 	}
+
 	public void setDate(String date) {
 		this.date = date;
 	}
-	public Memo(String memoNum, String content, String date) {
+
+	public Memo2(String number, String content, String date) {
 		super();
-		this.memoNum = memoNum;
+		this.number = number;
 		this.content = content;
 		this.date = date;
 	}
-	public Memo() {
-		
-	}
-	
-	
 }

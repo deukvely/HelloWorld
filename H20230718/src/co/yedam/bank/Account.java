@@ -1,14 +1,25 @@
 package co.yedam.bank;
 
 public class Account {
-	int no;
+	String accountNo;
 	String name;
 	int balance;
 	
-	public Account(int no, String name, int balance) {
+	public Account() {
+		
+	}
+	
+	Account(String accountNo, String name, int balance) {
 		super();
-		this.no = no;
+		this.accountNo = accountNo;
 		this.name = name;
 		this.balance = balance;
 	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+	
+	
+
 }

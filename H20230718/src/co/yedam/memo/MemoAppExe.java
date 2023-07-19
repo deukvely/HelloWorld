@@ -20,6 +20,7 @@ public class MemoAppExe {
 				String no = scn.next();
 				String content = scn.next();
 				String date = scn.next();
+				String no1 = scn.nextLine();
 //				System.out.println(no+" "+ content+" "+date);
 				Memo memo = new Memo(no, content, date);
 				if(app.addMemo(memo)) {

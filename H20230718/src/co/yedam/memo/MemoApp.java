@@ -3,7 +3,7 @@ package co.yedam.memo;
 public class MemoApp {
 	Memo[] memo;
 	int memoNum = 0;
-	
+	Memo mo = new Memo();
 	MemoApp(){
 		memo = new Memo[3];
 	}
@@ -15,7 +15,7 @@ public class MemoApp {
 		return true;
 	}
 //	boolean editMemo() {
-//		
+//	
 //	}
 //	boolean delMemo() {
 //		

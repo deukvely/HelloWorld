@@ -1,6 +1,6 @@
 package co.yedam.abstracts;
 
-public class Phone {
+public abstract class Phone {
 	// 필드
 	private String owner;
 
@@ -18,7 +18,5 @@ public class Phone {
 	}
 
 	// 추상메소드: 자식클래스에서 기능을 반드시 구현하도록 강제함
-	public abstract void powerOff() {
-		
-	}
+	public abstract void powerOff();
 }

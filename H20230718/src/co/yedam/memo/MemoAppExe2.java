@@ -8,9 +8,18 @@ public class MemoAppExe2 {
 		Scanner scn = new Scanner(System.in);
 		boolean run = true;
 		MemoApp2 app2 = new MemoApp2();
+		int menu;
+		
 		while (run) {
 			System.out.println("1.메모등록 2.메모수정 3.메모삭제 4.메모록록 5.메모조회 6.종료");
-			int menu = Integer.parseInt(scn.nextLine());
+			try {
+				menu = Integer.parseInt(scn.nextLine());
+			} catch (NumberFormatException e) {
+				System.out.println("메뉴 잘못 선택");
+//				menu = 2;
+				continue;
+			}
+
 			if (menu == 1) {
 				System.out.println("번호 내용 날짜???");
 				String num = scn.next();
@@ -58,11 +67,11 @@ public class MemoAppExe2 {
 				String str = scn.nextLine();
 				String result = app2.findMemo(str);
 				if (result != null) {
-					System.out.printf("회원번호: %s, 메모내용: %s\n", str, result);				
+					System.out.printf("회원번호: %s, 메모내용: %s\n", str, result);
 				} else {
 					System.out.println("회원번호가 없습니다.");
 				}
-				
+
 			} else if (menu == 6) {
 				System.out.println("종료");
 				run = false;

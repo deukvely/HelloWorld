@@ -13,7 +13,7 @@ public class BankAppExe {
 
 		while (run) {
 
-			System.out.println("1.등록 2.입금 3.출금 4.잔액조회 5.계좌목록 6.종료");
+			System.out.println("1.등록 22.입금 3.출금 4.잔액조회 5.계좌목록 6.종료");
 			System.out.print("선택>> ");
 			int menu = Integer.parseInt(scn.nextLine());
 			if (menu == 1) {

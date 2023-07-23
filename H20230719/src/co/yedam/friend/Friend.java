@@ -9,13 +9,12 @@ public class Friend {
 		this.name = name;
 		this.phone = phone;
 	}
-	
+
 	public Friend() {
-		
+
 	}
 
 	// getter / setter
-
 	public String getName() {
 		return name;
 	}

@@ -56,13 +56,13 @@ public class AdderessAppExe {
 					String phone = sc.next();
 					String comp = sc.next();
 					String dept = sc.next();
+					sc.nextLine();
 
 					if (app.addFriend(new UniFriend(name, phone, comp, dept)) == false) {
 						System.out.println("등록실패");
 					} else {
 						System.out.println("등록성공");
 					}
-					sc.nextLine();
 				} else if (frd == 3) {
 					System.out.println("친구 등록");
 					System.out.println("이름 연락처");

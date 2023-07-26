@@ -2,7 +2,7 @@ package co.yedam.score;
 
 import java.io.Serializable;
 
-public class Score  implements Serializable {
+public class Score implements Serializable {
 	private int no;
 	private String name;
 	private int kor;

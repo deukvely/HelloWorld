@@ -111,13 +111,5 @@ public class MainMenu {
 		sc.close();
 	}
 
-	private void boardList() {
-		BoardService bs = new BoardServiceImpl();
-		List<BoardVO> boards = new ArrayList<BoardVO>();
-		boards = bs.boardSelectList();
-		
-		for(BoardVO board : boards) {
-			board.toString();
-		}
-	}
+	
 }

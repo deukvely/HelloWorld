@@ -29,7 +29,7 @@ public class DataSource { // 싱글톤 패턴
 	}
 	
 	private void getProperty() { // db.properties 파일에서 정보를 가져온다
-		String resource = "/config/db.properties";
+		String resource = "/db.properties";
 		Properties properties = new Properties();
 		try {
 			InputStream reader = getClass().getResourceAsStream(resource);

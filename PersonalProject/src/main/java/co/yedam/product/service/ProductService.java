@@ -12,4 +12,7 @@ public interface ProductService {
 	public int productUpdate(ProductVO vo);
 
 	public int productDelete(ProductVO vo);
+
+	public int productCountUpdate(ProductVO vo);
+
 }

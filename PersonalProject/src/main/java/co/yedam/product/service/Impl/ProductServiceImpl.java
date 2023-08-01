@@ -17,10 +17,11 @@ public class ProductServiceImpl implements ProductService {
 	private Connection conn;
 	private PreparedStatement psmt;
 	private ResultSet rs;
+//	private SaleService ss = new SaleServiceImpl();
 
 	@Override
 	public List<ProductVO> productSelectList() {
-		String sql = "SELECT * FROM PRODUCT";
+		String sql = "SELECT * FROM PRODUCT ORDER BY PRO_NUMBER";
 		List<ProductVO> products = new ArrayList<ProductVO>();
 		ProductVO vo;
 		try {
@@ -35,6 +36,7 @@ public class ProductServiceImpl implements ProductService {
 				vo.setProPrice(rs.getInt("pro_price"));
 				vo.setProCount(rs.getInt("pro_count"));
 				products.add(vo);
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -52,20 +54,20 @@ public class ProductServiceImpl implements ProductService {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, vo.getProNumber());
 			rs = psmt.executeQuery();
-			if(rs.next()) {
+			if (rs.next()) {
 				vo = new ProductVO();
 				vo.setProNumber(rs.getInt("pro_number"));
 				vo.setProName(rs.getString("pro_name"));
 				vo.setProType(rs.getString("pro_type"));
 				vo.setProPrice(rs.getInt("pro_price"));
 				vo.setProCount(rs.getInt("pro_count"));
+				return vo;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close();
 		}
-		
 		return null;
 	}
 
@@ -82,6 +84,7 @@ public class ProductServiceImpl implements ProductService {
 			psmt.setInt(4, vo.getProPrice());
 			psmt.setInt(5, vo.getProCount());
 			n = psmt.executeUpdate();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -100,6 +103,7 @@ public class ProductServiceImpl implements ProductService {
 			psmt.setInt(1, vo.getProPrice());
 			psmt.setInt(2, vo.getProNumber());
 			n = psmt.executeUpdate();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -107,7 +111,7 @@ public class ProductServiceImpl implements ProductService {
 		}
 		return n;
 	}
-		
+
 	@Override
 	public int productDelete(ProductVO vo) {
 		int n = 0;
@@ -117,6 +121,26 @@ public class ProductServiceImpl implements ProductService {
 			psmt = conn.prepareStatement(sql);
 			psmt.setInt(1, vo.getProNumber());
 			n = psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return n;
+	}
+
+	@Override
+	public int productCountUpdate(ProductVO vo) {
+		int n = 0;
+		String sql = "UPDATE PRODUCT SET PRO_COUNT = ? WHERE PRO_NUMBER = ?";
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, vo.getProCount());
+			psmt.setInt(2, vo.getProNumber());
+			n = psmt.executeUpdate();
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -137,4 +161,5 @@ public class ProductServiceImpl implements ProductService {
 			e.printStackTrace();
 		}
 	}
+
 }

@@ -10,7 +10,6 @@ import java.util.List;
 import co.yedam.PersonalProject.db.DataSource;
 import co.yedam.purchase.service.PurchaseService;
 import co.yedam.purchase.service.PurchaseVO;
-import co.yedam.sale.service.SaleVO;
 
 public class PurchaseServiceImpl implements PurchaseService {
 	private DataSource dao = DataSource.getInstance();
@@ -20,9 +19,8 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Override
 	public List<PurchaseVO> purchaseSelectList() {
-		String sql = "SELECT PUR_NUMBER, PUR_NAME, PUR_COUNT, PUR_DATE "
-				+ "FROM  PURCHASE PU LEFT JOIN PRODUCT P ON(PU.PUR_NUMBER "
-				+ "= P.PRO_NUMBER)";
+		String sql = "SELECT PUR_NUMBER, PUR_COUNT, " + "PUR_DATE FROM PURCHASE PU LEFT JOIN "
+				+ "PRODUCT P ON(PU.PUR_NUMBER = P.PRO_NUMBER)" + "ORDER BY PUR_NUMBER, PUR_COUNT";
 		List<PurchaseVO> purchases = new ArrayList<PurchaseVO>();
 		PurchaseVO vo;
 		try {
@@ -32,10 +30,10 @@ public class PurchaseServiceImpl implements PurchaseService {
 			while (rs.next()) {
 				vo = new PurchaseVO();
 				vo.setPurchaseNumber(rs.getInt("pur_number"));
-				vo.setPurchaseName(rs.getString("pur_name"));
 				vo.setPurchaseCount(rs.getInt("pur_count"));
 				vo.setPurchaseDate(rs.getDate("pur_date"));
 				purchases.add(vo);
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -47,9 +45,23 @@ public class PurchaseServiceImpl implements PurchaseService {
 
 	@Override
 	public int purchaseInsert(PurchaseVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
+		int n = 0;
+		String sql = "INSERT INTO PURCHASE VALUES (?,?,?)";
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, vo.getPurchaseNumber());
+			psmt.setInt(2, vo.getPurchaseCount());
+			psmt.setDate(3, vo.getPurchaseDate());
+			n = psmt.executeUpdate();
+		} catch (SQLException | NullPointerException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return n;
 	}
+
 	private void close() {
 		try {
 			if (rs != null)
@@ -62,5 +74,4 @@ public class PurchaseServiceImpl implements PurchaseService {
 			e.printStackTrace();
 		}
 	}
-
 }

@@ -16,12 +16,12 @@ public class SaleServiceImpl implements SaleService {
 	private Connection conn;
 	private PreparedStatement psmt;
 	private ResultSet rs;
+//	private ProductService pds = new ProductServiceImpl();
 
 	@Override
 	public List<SaleVO> saleSelectList() {
-		String sql = "SELECT SAL_NUMBER, SAL_NAME, SAL_COUNT, "
-				+ "SAL_DATE FROM  SALE S LEFT JOIN PRODUCT P "
-				+ "ON(S.SAL_NUMBER = P.PRO_NUMBER)";
+		String sql = "SELECT SAL_NUMBER, SAL_COUNT, " + "SAL_DATE FROM  SALE S LEFT JOIN PRODUCT P "
+				+ "ON(S.SAL_NUMBER = P.PRO_NUMBER)" + "ORDER BY SAL_NUMBER, SAL_COUNT";
 		List<SaleVO> sales = new ArrayList<SaleVO>();
 		SaleVO vo;
 		try {
@@ -31,10 +31,10 @@ public class SaleServiceImpl implements SaleService {
 			while (rs.next()) {
 				vo = new SaleVO();
 				vo.setSaleNumber(rs.getInt("sal_number"));
-				vo.setSaleName(rs.getString("sal_name"));
 				vo.setSaleCount(rs.getInt("sal_count"));
 				vo.setSaleDate(rs.getDate("sal_date"));
 				sales.add(vo);
+
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -45,8 +45,23 @@ public class SaleServiceImpl implements SaleService {
 	}
 
 	@Override
-	public int SaleInsert(SaleVO vo) {
-		return 0;
+	public int saleInsert(SaleVO vo) {
+		int n = 0;
+		String sql = "INSERT INTO SALE VALUES (?,?,?)";
+		try {
+			conn = dao.getConnection();
+			psmt = conn.prepareStatement(sql);
+			psmt.setInt(1, vo.getSaleNumber());
+			psmt.setInt(2, vo.getSaleCount());
+			psmt.setDate(3, vo.getSaleDate());
+			n = psmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close();
+		}
+		return n;
 	}
 
 	private void close() {
@@ -61,5 +76,6 @@ public class SaleServiceImpl implements SaleService {
 			e.printStackTrace();
 		}
 	}
-
 }
+// 메인 insert 할 때 부르고
+// product vo에 정하고

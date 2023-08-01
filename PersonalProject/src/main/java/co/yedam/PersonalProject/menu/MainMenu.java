@@ -1,5 +1,6 @@
 package co.yedam.PersonalProject.menu;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -44,97 +45,112 @@ public class MainMenu {
 		System.out.println("====2.구매내역====");
 		System.out.println("=====3.판매======");
 		System.out.println("====4.판매내역====");
-		System.out.println("=====4.종료======");
+		System.out.println("=====5.종료======");
 		System.out.println("원하는 작업번호를 입력하세요");
 	}
 
 	public void mainRun() {
 		boolean run = false;
 		do {
-			mainTitle();
-			int key = Integer.parseInt(sc.nextLine());
-			switch (key) {
-			case 1:
-				productRun();
-				break;
-			case 2:
-				salPurRun();
-				break;
-			case 3:
-				System.out.println("작업을 종료합니다.");
-				run = true;
-				break;
-			default:
-				System.out.println("다시 입력해주세요.");
-				continue;
+			try {
+				mainTitle();
+				int key = Integer.parseInt(sc.nextLine());
+				switch (key) {
+				case 1:
+					productRun();
+					break;
+				case 2:
+					salPurRun();
+					break;
+				case 3:
+					System.out.println("작업을 종료합니다.");
+					run = true;
+					break;
+				default:
+					System.out.println("다시 입력해주세요.");
+					continue;
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("숫자를 입력해주세요.");
 			}
 		} while (!run);
 		sc.close();
+
 	}
 
 	public void productRun() {
 		boolean run = false;
 		do {
-			productTitle();
-			int key = Integer.parseInt(sc.nextLine());
-			switch (key) {
-			case 1:
-				// 상품 등록
-				productSelectList();
-				break;
-			case 2:
-				// 상품내역
-				productSelect();
-				break;
-			case 3:
-				// 단건조회
-				productInsert();
-				break;
-			case 4:
-				// 상품수정
-				productUpdate();
-				break;
-			case 5:
-				// 상품삭제
-				productDelete();
-				break;
-			case 6:
-				run = true;
-				break;
-			default:
-				System.out.println("다시 입력해주세요.");
-				continue;
+			try {
+				productTitle();
+				int key = Integer.parseInt(sc.nextLine());
+				switch (key) {
+				case 1:
+					// 상품 등록
+					productSelectList();
+					break;
+				case 2:
+					// 상품내역
+					productSelect();
+					break;
+				case 3:
+					// 단건조회
+					productInsert();
+					break;
+				case 4:
+					// 상품수정
+					productUpdate();
+					break;
+				case 5:
+					// 상품삭제
+					productDelete();
+					break;
+				case 6:
+					run = true;
+					break;
+				default:
+					System.out.println("다시 입력해주세요.");
+					continue;
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("숫자를 입력해주세요.");
 			}
 		} while (!run);
+
 	}
 
 	public void salPurRun() {
 		boolean run = false;
 		do {
-			salPurTitle();
-			int key = Integer.parseInt(sc.nextLine());
-			switch (key) {
-			case 1:
-				// 구매
-				
-				break;
-			case 2:
-				// 구매내역
-				saleSelectList();
-				break;
-			case 3:
-				// 판매
-				break;
-			case 4:
-				// 판매내역
-				purchaseSelectList();
-				break;
-			case 5:
-				run = true;
-				break;
-			default:
-				System.out.println("다시 입력해주세요.");
-				continue;
+			try {
+				salPurTitle();
+				int key = Integer.parseInt(sc.nextLine());
+				switch (key) {
+				case 1:
+					// 구매
+					purchaseInsert();
+					break;
+				case 2:
+					// 구매내역
+					purchaseSelectList();
+					break;
+				case 3:
+					// 판매
+					saleInsert();
+					break;
+				case 4:
+					// 판매내역
+					saleSelectList();
+					break;
+				case 5:
+					run = true;
+					break;
+				default:
+					System.out.println("다시 입력해주세요.");
+					continue;
+				}
+			} catch (NumberFormatException e) {
+				System.out.println("숫자를 입력해주세요.");
 			}
 		} while (!run);
 	}
@@ -180,9 +196,9 @@ public class MainMenu {
 
 		int result = pds.productInsert(product);
 		if (result == 1) {
-			System.out.println("등록");
+			System.out.println("등록되었습니다.");
 		} else {
-			System.out.println("등록 X");
+			System.out.println("등록에 실패하였습니다.");
 		}
 	}
 
@@ -199,9 +215,9 @@ public class MainMenu {
 
 		int result = pds.productUpdate(product);
 		if (result == 1) {
-			System.out.println("수정");
+			System.out.println("수정되었습니다.");
 		} else {
-			System.out.println("수정 X");
+			System.out.println("수정에 실패하였습니다.");
 		}
 	}
 
@@ -209,16 +225,14 @@ public class MainMenu {
 		ProductVO product = new ProductVO();
 		System.out.println("번호");
 		String str = sc.nextLine();
-		String[] data = str.split(" ");
-
-		int no = Integer.parseInt(data[0]);
+		int no = Integer.parseInt(str);
 		product.setProNumber(no);
 
 		int result = pds.productDelete(product);
 		if (result == 1) {
-			System.out.println("삭제");
+			System.out.println("삭제되었습니다.");
 		} else {
-			System.out.println("삭제 X");
+			System.out.println("삭제에 실패하였습니다.");
 		}
 	}
 
@@ -230,10 +244,9 @@ public class MainMenu {
 			}
 		} else {
 			System.out.println("등록된 상품이 존재하지 않습니다.");
-
 		}
 	}
-	
+
 	private void purchaseSelectList() {
 		List<PurchaseVO> purchases = pcs.purchaseSelectList();
 		if (!purchases.isEmpty()) {
@@ -242,7 +255,66 @@ public class MainMenu {
 			}
 		} else {
 			System.out.println("등록된 상품이 존재하지 않습니다.");
+		}
+	}
 
+	private void saleInsert() {
+		SaleVO sale = new SaleVO();
+		System.out.print("번호 갯수 날짜(YYYY-MM-DD)");
+		String str = sc.nextLine();
+		String[] data = str.split(" ");
+
+		int no = Integer.parseInt(data[0]);
+		sale.setSaleNumber(no);
+		int count = Integer.parseInt(data[1]);
+		sale.setSaleCount(count);
+		Date date = Date.valueOf(data[2]);
+		sale.setSaleDate(date);
+
+		ProductVO product = new ProductVO();
+		product.setProNumber(no);
+		product = pds.productSelect(product);
+
+		int co = product.getProCount();
+		co -= count;
+
+		if (co > 0) {
+			product.setProCount(co);
+			pds.productCountUpdate(product);
+			int result = ss.saleInsert(sale);
+			System.out.println("등록되었습니다.");
+		} else {
+			System.out.println("등록되지 않거나, 판매갯수가 보다 많습니다.");
+		}
+	}
+
+	private void purchaseInsert() {
+		PurchaseVO purchase = new PurchaseVO();
+		System.out.print("번호 갯수 날짜(YYYY-MM-DD)");
+		String str = sc.nextLine();
+		String[] data = str.split(" ");
+
+		int no = Integer.parseInt(data[0]);
+		purchase.setPurchaseNumber(no);
+		int count = Integer.parseInt(data[1]);
+		purchase.setPurchaseCount(count);
+		Date date = Date.valueOf(data[2]);
+		purchase.setPurchaseDate(date);
+
+		ProductVO product = new ProductVO();
+		product.setProNumber(no);
+		product = pds.productSelect(product);
+
+		int co = product.getProCount();
+		co += count;
+
+		if (co > 0) {
+			product.setProCount(co);
+			pds.productCountUpdate(product);
+			int result = pcs.purchaseInsert(purchase);
+			System.out.println("등록되었습니다.");
+		} else {
+			System.out.println("등록에 실패하였습니다.");
 		}
 	}
 }

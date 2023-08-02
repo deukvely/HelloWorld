@@ -26,7 +26,7 @@ public class MainMenu {
 		System.out.println("===2.입출고관리====");
 		System.out.println("=====3.종료======");
 		System.out.println("원하는 작업번호를 입력하세요");
-	}
+	} // fdaskmfdkasmfksmafkmdk
 
 	private void productTitle() {
 		System.out.println("=====상품관리=====");
